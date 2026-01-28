@@ -134,25 +134,25 @@
                     <!-- Quantity Selector -->
                     <div class="mb-6">
                         <label class="block text-sm font-semibold text-gray-700 mb-3">Quantity</label>
-                        <div class="flex items-center space-x-4">
+                        <div class="flex items-center gap-3">
                             <!-- Decrement Button -->
                             <button 
                                 wire:click="decrementQuantity"
                                 @if($quantity <= 1 || $product->stock <= 0) disabled @endif
-                                class="w-12 h-12 rounded-lg border-2 border-gray-300 hover:border-rose-500 disabled:border-gray-200 disabled:cursor-not-allowed bg-white hover:bg-rose-50 disabled:bg-gray-100 transition-all duration-200 flex items-center justify-center group"
+                                class="w-10 h-10 rounded-lg bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 hover:border-rose-400 hover:from-rose-50 hover:to-rose-100 disabled:border-gray-200 disabled:cursor-not-allowed disabled:from-gray-100 disabled:to-gray-100 shadow-sm hover:shadow-md disabled:shadow-none transition-all duration-300 flex items-center justify-center group transform hover:scale-105 active:scale-95"
                             >
-                                <svg class="w-5 h-5 text-gray-600 group-hover:text-rose-600 group-disabled:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                <svg class="w-5 h-5 text-gray-600 group-hover:text-rose-600 group-disabled:text-gray-400 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/>
                                 </svg>
                             </button>
 
                             <!-- Quantity Display -->
-                            <div class="flex-1 max-w-[100px]">
+                            <div class="relative">
                                 <input 
                                     type="text" 
                                     value="{{ $quantity }}" 
                                     readonly
-                                    class="w-full text-center text-xl font-bold text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-lg py-2 px-4"
+                                    class="w-16 h-10 text-center text-xl font-bold text-gray-900 bg-gradient-to-b from-white to-gray-50 border-2 border-gray-200 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-400 transition-all duration-200"
                                 />
                             </div>
 
@@ -160,16 +160,21 @@
                             <button 
                                 wire:click="incrementQuantity"
                                 @if($quantity >= $product->stock || $product->stock <= 0) disabled @endif
-                                class="w-12 h-12 rounded-lg border-2 border-gray-300 hover:border-rose-500 disabled:border-gray-200 disabled:cursor-not-allowed bg-white hover:bg-rose-50 disabled:bg-gray-100 transition-all duration-200 flex items-center justify-center group"
+                                class="w-10 h-10 rounded-lg bg-rose-500 hover:bg-rose-600 disabled:bg-gray-300 disabled:cursor-not-allowed shadow-md hover:shadow-lg disabled:shadow-sm transition-all duration-300 flex items-center justify-center group transform hover:scale-105 active:scale-95"
                             >
-                                <svg class="w-5 h-5 text-gray-600 group-hover:text-rose-600 group-disabled:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                <svg class="w-6 h-6 text-white group-disabled:text-gray-600 transition-colors duration-200" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/>
                                 </svg>
                             </button>
                         </div>
                         
                         @if($product->stock > 0)
-                            <p class="text-xs text-gray-500 mt-2">Maximum available: {{ $product->stock }}</p>
+                            <p class="text-xs text-gray-500 mt-2.5 flex items-center">
+                                <svg class="w-3 h-3 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                {{ $product->stock }} available
+                            </p>
                         @endif
                     </div>
 

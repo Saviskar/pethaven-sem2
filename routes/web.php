@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\HomePage;
 use App\Livewire\ProductDetail;
+use App\Livewire\CartPage;
 
 Route::get('/', HomePage::class)->name('home');
 Route::get('/product/{product}', ProductDetail::class)->name('product.detail');
+Route::get('/cart', CartPage::class)->name('cart');
 
 Route::middleware([
     'auth:sanctum',
