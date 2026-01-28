@@ -22,14 +22,27 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'mobile' => ['required', 'string', 'max:20'],
+            'province_id' => ['required', 'exists:provinces,id'],
+            'city_id' => ['required', 'exists:cities,id'],
+            'address_line' => ['required', 'string', 'max:256'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
+            'mobile' => $input['mobile'],
             'password' => Hash::make($input['password']),
         ]);
+
+        // Create user address with province, city, and address line
+        $user->addresses()->create([
+            'address_line' => $input['address_line'],
+            'city_id' => $input['city_id'],
+        ]);
+
+        return $user;
     }
 }
