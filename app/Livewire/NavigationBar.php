@@ -18,7 +18,8 @@ class NavigationBar extends Component
     public function updateCartCount()
     {
         $cart = session()->get('cart', []);
-        $this->cartCount = collect($cart)->sum('quantity');
+        // Count the number of unique items (products) in cart, not total quantity
+        $this->cartCount = count($cart);
     }
 
     public function render()
