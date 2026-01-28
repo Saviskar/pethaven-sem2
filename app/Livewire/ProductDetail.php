@@ -9,11 +9,22 @@ class ProductDetail extends Component
 {
     public Product $product;
     public int $quantity = 1;
+    public string $backUrl;
 
     public function mount(Product $product)
     {
         // Load the product with its category relationship
         $this->product = $product->load('category');
+        
+        // Get the referrer URL, default to home if not available
+        $referrer = request()->headers->get('referer');
+        
+        // If referrer exists and is from our domain, use it; otherwise default to home
+        if ($referrer && str_contains($referrer, request()->getHost())) {
+            $this->backUrl = $referrer;
+        } else {
+            $this->backUrl = route('home');
+        }
     }
 
     public function incrementQuantity()
