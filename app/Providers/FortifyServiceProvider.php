@@ -26,6 +26,12 @@ class FortifyServiceProvider extends ServiceProvider
             \Laravel\Fortify\Contracts\RegisterResponse::class,
             \App\Http\Responses\RegisterResponse::class
         );
+
+        // Bind custom LoginResponse to redirect to home page after login
+        $this->app->singleton(
+            \Laravel\Fortify\Contracts\LoginResponse::class,
+            \App\Http\Responses\LoginResponse::class
+        );
     }
 
     /**
