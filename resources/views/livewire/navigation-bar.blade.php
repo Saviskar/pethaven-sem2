@@ -11,7 +11,7 @@
 
             <!-- Navigation Links (Desktop) -->
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#" class="text-gray-700 hover:text-rose-500 font-medium transition-colors">Shop</a>
+                <a href="{{ route('shop') }}" class="text-gray-700 hover:text-rose-500 font-medium transition-colors">Shop</a>
                 <a href="#" class="text-gray-700 hover:text-rose-500 font-medium transition-colors">Services</a>
                 <a href="#" class="text-gray-700 hover:text-rose-500 font-medium transition-colors">Community</a>
             </div>
@@ -55,7 +55,7 @@
              x-transition:leave-end="opacity-0 transform -translate-y-2"
              class="md:hidden border-t border-gray-200">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Shop</a>
+                <a href="{{ route('shop') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Shop</a>
                 <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Services</a>
                 <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Community</a>
                 
