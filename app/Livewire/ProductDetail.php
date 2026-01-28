@@ -32,8 +32,35 @@ class ProductDetail extends Component
 
     public function addToCart()
     {
-        // Placeholder for future cart functionality
+        // Get existing cart from session or create new array
+        $cart = session()->get('cart', []);
+        
+        $productId = $this->product->id;
+        
+        // If product already exists in cart, update quantity
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] += $this->quantity;
+        } else {
+            // Add new product to cart
+            $cart[$productId] = [
+                'name' => $this->product->name,
+                'price' => $this->product->price,
+                'quantity' => $this->quantity,
+                'image_url' => $this->product->image_url,
+            ];
+        }
+        
+        // Save cart to session
+        session()->put('cart', $cart);
+        
+        // Dispatch event to update cart count in navigation
+        $this->dispatch('cartUpdated');
+        
+        // Show success message
         session()->flash('message', 'Product added to cart!');
+        
+        // Reset quantity to 1
+        $this->quantity = 1;
     }
 
     public function render()

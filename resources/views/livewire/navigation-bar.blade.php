@@ -27,8 +27,13 @@
                 </button>
 
                 <!-- Cart -->
-                <a href="#" class="hidden sm:block bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg text-gray-700 font-medium transition-colors">
+                <a href="{{ route('cart') }}" class="hidden sm:block relative bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg text-gray-700 font-medium transition-colors">
                     Cart
+                    @if($cartCount > 0)
+                        <span class="absolute -top-2 -right-2 bg-rose-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
+                            {{ $cartCount }}
+                        </span>
+                    @endif
                 </a>
 
                 <!-- User Icon -->
@@ -56,7 +61,14 @@
                 
                 <!-- Mobile Cart & User Links -->
                 <div class="sm:hidden pt-2 border-t border-gray-200 space-y-1">
-                    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Cart</a>
+                    <a href="{{ route('cart') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">
+                        Cart
+                        @if($cartCount > 0)
+                            <span class="ml-2 bg-rose-500 text-white text-xs font-bold rounded-full px-2 py-1">
+                                {{ $cartCount }}
+                            </span>
+                        @endif
+                    </a>
                     <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Profile</a>
                 </div>
             </div>
