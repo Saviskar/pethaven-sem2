@@ -131,6 +131,48 @@
                         @endif
                     </div>
 
+                    <!-- Quantity Selector -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">Quantity</label>
+                        <div class="flex items-center space-x-4">
+                            <!-- Decrement Button -->
+                            <button 
+                                wire:click="decrementQuantity"
+                                @if($quantity <= 1 || $product->stock <= 0) disabled @endif
+                                class="w-12 h-12 rounded-lg border-2 border-gray-300 hover:border-rose-500 disabled:border-gray-200 disabled:cursor-not-allowed bg-white hover:bg-rose-50 disabled:bg-gray-100 transition-all duration-200 flex items-center justify-center group"
+                            >
+                                <svg class="w-5 h-5 text-gray-600 group-hover:text-rose-600 group-disabled:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                </svg>
+                            </button>
+
+                            <!-- Quantity Display -->
+                            <div class="flex-1 max-w-[100px]">
+                                <input 
+                                    type="text" 
+                                    value="{{ $quantity }}" 
+                                    readonly
+                                    class="w-full text-center text-xl font-bold text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-lg py-2 px-4"
+                                />
+                            </div>
+
+                            <!-- Increment Button -->
+                            <button 
+                                wire:click="incrementQuantity"
+                                @if($quantity >= $product->stock || $product->stock <= 0) disabled @endif
+                                class="w-12 h-12 rounded-lg border-2 border-gray-300 hover:border-rose-500 disabled:border-gray-200 disabled:cursor-not-allowed bg-white hover:bg-rose-50 disabled:bg-gray-100 transition-all duration-200 flex items-center justify-center group"
+                            >
+                                <svg class="w-5 h-5 text-gray-600 group-hover:text-rose-600 group-disabled:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        @if($product->stock > 0)
+                            <p class="text-xs text-gray-500 mt-2">Maximum available: {{ $product->stock }}</p>
+                        @endif
+                    </div>
+
                     <!-- Add to Cart Button -->
                     <div class="mt-auto">
                         <button 
