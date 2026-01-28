@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\HomePage;
+use App\Livewire\ProductDetail;
 
 Route::get('/', HomePage::class)->name('home');
+Route::get('/product/{product}', ProductDetail::class)->name('product.detail');
 
 Route::middleware([
     'auth:sanctum',

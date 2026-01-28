@@ -14,6 +14,11 @@ class ProductCard extends Component
         $this->product = $product;
     }
 
+    public function navigateToProduct()
+    {
+        return $this->redirect(route('product.detail', ['product' => $this->product->id]), navigate: true);
+    }
+
     public function render()
     {
         return view('livewire.product-card');

@@ -1,4 +1,4 @@
-<div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+<div wire:click="navigateToProduct" class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group cursor-pointer">
     <!-- Product Image -->
     <div class="relative h-64 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
         @if($product->image_url)
