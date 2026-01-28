@@ -35,6 +35,7 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'mobile' => $input['mobile'],
             'password' => Hash::make($input['password']),
+            'role_id' => 2, // Default role: Customer
         ]);
 
         // Create user address with province, city, and address line
