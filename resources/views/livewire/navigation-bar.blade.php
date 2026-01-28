@@ -37,11 +37,12 @@
                 </a>
 
                 <!-- User Icon -->
-                <button class="hidden sm:block text-gray-600 hover:text-rose-500 transition-colors">
+                <!-- User Icon -->
+                <a href="{{ route('dashboard') }}" class="hidden sm:block text-gray-600 hover:text-rose-500 transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                     </svg>
-                </button>
+                </a>
             </div>
         </div>
 
@@ -69,7 +70,7 @@
                             </span>
                         @endif
                     </a>
-                    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Profile</a>
+                    <a href="{{ route('dashboard') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Profile</a>
                 </div>
             </div>
         </div>

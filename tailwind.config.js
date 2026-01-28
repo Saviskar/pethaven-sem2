@@ -14,7 +14,19 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Instrument Sans', ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                'theme-light': '#FDFDFC',
+                'theme-dark': '#0a0a0a',
+                'card-light': '#ffffff',
+                'card-dark': '#161615',
+                'border-light': '#e3e3e0',
+                'border-dark': '#3E3E3A',
+                'text-light': '#1b1b18',
+                'text-dark': '#EDEDEC',
+                'text-muted-light': '#706f6c',
+                'text-muted-dark': '#A1A09A',
             },
         },
     },
