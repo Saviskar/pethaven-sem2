@@ -15,7 +15,14 @@ class LoginResponse implements LoginResponseContract
      */
     public function toResponse($request)
     {
-        // Redirect to home page instead of dashboard
+        // Redirect admins to dashboard
+        if (auth()->user()->role_id === 1) {
+            return $request->wantsJson()
+                ? new JsonResponse('', 200)
+                : redirect()->route('admin.dashboard');
+        }
+
+        // Redirect others to home page
         return $request->wantsJson()
             ? new JsonResponse('', 200)
             : redirect()->route('home');

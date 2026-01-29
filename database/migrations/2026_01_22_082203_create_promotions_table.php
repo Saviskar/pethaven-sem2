@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->decimal('percentage', 5, 2);
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
