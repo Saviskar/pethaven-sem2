@@ -146,6 +146,13 @@ class CheckoutPage extends Component
                 'quantity' => $item['quantity'],
                 'unit_price_at_order' => $item['price'],
             ]);
+
+            // Decrement stock
+            $product = \App\Models\Product::find($productId);
+            if ($product) {
+                $product->stock = max(0, $product->stock - $item['quantity']);
+                $product->save();
+            }
         }
 
         session()->forget('cart');
