@@ -36,8 +36,13 @@ class ShopPage extends Component
         $query = Product::with('category');
 
         // Filter by category if selected
+        $currentTitle = $this->petType;
         if ($this->selectedCategory) {
             $query->where('category_id', $this->selectedCategory);
+            $category = Category::find($this->selectedCategory);
+            if ($category) {
+                $currentTitle = $category->name;
+            }
         }
 
         // Get paginated products (12 per page)
@@ -46,6 +51,7 @@ class ShopPage extends Component
         return view('livewire.shop-page', [
             'products' => $products,
             'categories' => $categories,
+            'currentTitle' => $currentTitle,
         ])->layout('layouts.guest');
     }
 }

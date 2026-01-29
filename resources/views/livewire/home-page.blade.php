@@ -12,9 +12,9 @@
                 <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
                     Your one-stop shop for all your pet's needs. Explore our wide range of products and services.
                 </p>
-                <button class="bg-rose-500 hover:bg-rose-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200">
+                <a href="{{ route('shop') }}" class="inline-block bg-rose-500 hover:bg-rose-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200">
                     Shop Now
-                </button>
+                </a>
             </div>
 
             <!-- Hero Image Placeholder (using gradient as background) -->
