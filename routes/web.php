@@ -18,6 +18,8 @@ use App\Livewire\Admin\Promotion\Create as PromotionCreate;
 use App\Livewire\Admin\Promotion\Edit as PromotionEdit;
 use App\Livewire\Admin\Order\Index as OrderIndex;
 use App\Livewire\Admin\Order\Show as OrderShow;
+use App\Livewire\Admin\Customer\Index as CustomerIndex;
+use App\Livewire\Admin\Customer\Show as CustomerShow;
 
 Route::middleware([
     'auth:sanctum',
@@ -63,4 +65,8 @@ Route::middleware([
     // Orders
     Route::get('/orders', OrderIndex::class)->name('orders.index');
     Route::get('/orders/{order}', OrderShow::class)->name('orders.show');
+
+    // Customers
+    Route::get('/customers', CustomerIndex::class)->name('customers.index');
+    Route::get('/customers/{user}', CustomerShow::class)->name('customers.show');
 });
