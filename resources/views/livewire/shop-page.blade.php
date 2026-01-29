@@ -11,12 +11,12 @@
                 <nav class="flex items-center space-x-2 text-sm">
                     <a href="{{ route('home') }}" class="text-rose-600 hover:text-rose-700 font-medium transition-colors">Shop</a>
                     <span class="text-gray-400">/</span>
-                    <span class="text-gray-600 capitalize">{{ $petType }}</span>
+                    <span class="text-gray-600 capitalize">{{ $currentTitle }}</span>
                 </nav>
             </div>
 
             {{-- Page Title --}}
-            <h1 class="text-4xl font-bold text-gray-900 mb-8 capitalize">{{ $petType }}</h1>
+            <h1 class="text-4xl font-bold text-gray-900 mb-8 capitalize">{{ $currentTitle }}</h1>
 
             {{-- Category Filter Buttons --}}
             <div class="flex flex-wrap gap-3 mb-8">
