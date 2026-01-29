@@ -48,7 +48,7 @@
         </p>
 
         <!-- Link to Orders if it exists, otherwise just Profile -->
-        <a href="{{ route('profile.show') }}" class="mt-4 inline-flex items-center text-sm font-semibold text-orange-500 hover:text-orange-600">
+        <a href="{{ route('my-orders') }}" class="mt-4 inline-flex items-center text-sm font-semibold text-orange-500 hover:text-orange-600">
             View Orders <span class="ml-1">&rarr;</span>
         </a>
     </div>

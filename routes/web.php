@@ -6,6 +6,8 @@ use App\Livewire\ProductDetail;
 use App\Livewire\CartPage;
 use App\Livewire\ShopPage;
 use App\Livewire\CheckoutPage;
+use App\Livewire\MyOrdersPage;
+use App\Livewire\OrderDetailPage;
 
 Route::get('/', HomePage::class)->name('home');
 Route::get('/shop/{type?}', ShopPage::class)->name('shop');
@@ -23,4 +25,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    
+    Route::get('/my-orders', MyOrdersPage::class)->name('my-orders');
+    Route::get('/my-orders/{order}', OrderDetailPage::class)->name('my-orders.show');
 });

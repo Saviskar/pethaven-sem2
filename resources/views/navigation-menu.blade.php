@@ -98,6 +98,10 @@
                                         {{ __('Profile') }}
                                     </x-dropdown-link>
 
+                                    <x-dropdown-link href="{{ route('my-orders') }}">
+                                        {{ __('My Orders') }}
+                                    </x-dropdown-link>
+
                                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                         <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                             {{ __('API Tokens') }}
@@ -204,6 +208,10 @@
                 <!-- Account Management -->
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link href="{{ route('my-orders') }}" :active="request()->routeIs('my-orders')">
+                    {{ __('My Orders') }}
                 </x-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
