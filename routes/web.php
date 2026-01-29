@@ -8,6 +8,14 @@ use App\Livewire\ShopPage;
 use App\Livewire\CheckoutPage;
 use App\Livewire\MyOrdersPage;
 use App\Livewire\OrderDetailPage;
+use App\Http\Middleware\EnsureUserIsAdmin;
+use App\Livewire\Admin\Dashboard as AdminDashboard;
+use App\Livewire\Admin\Product\Index as ProductIndex;
+use App\Livewire\Admin\Product\Create as ProductCreate;
+use App\Livewire\Admin\Product\Edit as ProductEdit;
+use App\Livewire\Admin\Promotion\Index as PromotionIndex;
+use App\Livewire\Admin\Promotion\Create as PromotionCreate;
+use App\Livewire\Admin\Promotion\Edit as PromotionEdit;
 
 Route::middleware([
     'auth:sanctum',
@@ -28,4 +36,25 @@ Route::middleware([
     
     Route::get('/my-orders', MyOrdersPage::class)->name('my-orders');
     Route::get('/my-orders/{order}', OrderDetailPage::class)->name('my-orders.show');
+});
+
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    EnsureUserIsAdmin::class,
+])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', AdminDashboard::class)->name('dashboard');
+    
+    // Products
+    Route::get('/products', ProductIndex::class)->name('products.index');
+    Route::get('/products/create', ProductCreate::class)->name('products.create');
+    Route::get('/products/{product}/edit', ProductEdit::class)->name('products.edit');
+
+    // Promotions
+    Route::get('/promotions', PromotionIndex::class)->name('promotions.index');
+    Route::get('/promotions/create', PromotionCreate::class)->name('promotions.create');
+    Route::get('/promotions/{promotion}/edit', PromotionEdit::class)->name('promotions.edit');
 });

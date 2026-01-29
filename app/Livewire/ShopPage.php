@@ -12,11 +12,11 @@ class ShopPage extends Component
     use WithPagination;
 
     public $selectedCategory = null;
-    public $petType = 'dog'; // Default to dog, can be changed based on route parameter
+    public $petType = 'all'; // Default to dog, can be changed based on route parameter
 
     protected $queryString = ['selectedCategory', 'petType'];
 
-    public function mount($type = 'dog')
+    public function mount($type = 'all')
     {
         $this->petType = strtolower($type);
     }

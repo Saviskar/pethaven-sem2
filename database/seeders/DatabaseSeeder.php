@@ -127,7 +127,11 @@ class DatabaseSeeder extends Seeder
         $promotions = [5.00, 10.00, 15.00, 20.00, 25.00];
         $promotionModels = [];
         foreach ($promotions as $percentage) {
-            $promotionModels[] = Promotion::create(['percentage' => $percentage]);
+            $promotionModels[] = Promotion::create([
+                'title' => 'Discount ' . $percentage . '%',
+                'percentage' => $percentage,
+                'status' => true,
+            ]);
         }
 
         // Attach random promotions to some products
