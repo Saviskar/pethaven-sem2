@@ -16,6 +16,8 @@ use App\Livewire\Admin\Product\Edit as ProductEdit;
 use App\Livewire\Admin\Promotion\Index as PromotionIndex;
 use App\Livewire\Admin\Promotion\Create as PromotionCreate;
 use App\Livewire\Admin\Promotion\Edit as PromotionEdit;
+use App\Livewire\Admin\Order\Index as OrderIndex;
+use App\Livewire\Admin\Order\Show as OrderShow;
 
 Route::middleware([
     'auth:sanctum',
@@ -57,4 +59,8 @@ Route::middleware([
     Route::get('/promotions', PromotionIndex::class)->name('promotions.index');
     Route::get('/promotions/create', PromotionCreate::class)->name('promotions.create');
     Route::get('/promotions/{promotion}/edit', PromotionEdit::class)->name('promotions.edit');
+
+    // Orders
+    Route::get('/orders', OrderIndex::class)->name('orders.index');
+    Route::get('/orders/{order}', OrderShow::class)->name('orders.show');
 });
