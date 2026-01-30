@@ -59,9 +59,9 @@
                                         <span class="font-medium text-gray-900">{{ $item->product->name }}</span>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 text-gray-600">${{ number_format($item->unit_price_at_order, 2) }}</td>
+                                <td class="px-6 py-4 text-gray-600">LKR {{ number_format($item->unit_price_at_order, 2) }}</td>
                                 <td class="px-6 py-4 text-gray-600">{{ $item->quantity }}</td>
-                                <td class="px-6 py-4 font-medium text-gray-900">${{ number_format($item->unit_price_at_order * $item->quantity, 2) }}</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">LKR {{ number_format($item->unit_price_at_order * $item->quantity, 2) }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -73,15 +73,15 @@
                 <div class="w-full max-w-sm ml-auto space-y-3">
                     <div class="flex justify-between text-gray-600">
                         <span>Subtotal</span>
-                        <span>${{ number_format($order->items->sum(fn($i) => $i->unit_price_at_order * $i->quantity), 2) }}</span>
+                        <span>LKR {{ number_format($order->items->sum(fn($i) => $i->unit_price_at_order * $i->quantity), 2) }}</span>
                     </div>
                     <div class="flex justify-between text-gray-600">
                         <span>Shipping</span>
-                        <span>$5.00</span> 
+                        <span>LKR 500.00</span> 
                     </div>
                     <div class="border-t border-gray-200 pt-3 flex justify-between text-xl font-bold text-gray-900">
                         <span>Total</span>
-                        <span>${{ number_format($order->items->sum(fn($i) => $i->unit_price_at_order * $i->quantity) + 5, 2) }}</span>
+                        <span>LKR {{ number_format($order->items->sum(fn($i) => $i->unit_price_at_order * $i->quantity) + 500, 2) }}</span>
                     </div>
                 </div>
             </div>

@@ -62,7 +62,7 @@
                             </h3>
                             <p class="text-sm text-gray-500 mb-2">{{ $product->category->name }}</p>
                             <div class="flex items-center justify-between">
-                                <span class="text-lg font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
+                                <span class="text-lg font-bold text-gray-900">LKR {{ number_format($product->price, 2) }}</span>
                                 @if($product->stock > 0)
                                     <span class="text-xs text-green-600 font-medium">In Stock</span>
                                 @else

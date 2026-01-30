@@ -51,7 +51,7 @@
 
                                     <!-- Price -->
                                     <td class="px-6 py-4">
-                                        <span class="text-rose-600 font-semibold">${{ number_format($item['price'], 2) }}</span>
+                                        <span class="text-rose-600 font-semibold">LKR {{ number_format($item['price'], 2) }}</span>
                                     </td>
 
                                     <!-- Quantity Controls -->
@@ -85,7 +85,7 @@
 
                                     <!-- Item Total -->
                                     <td class="px-6 py-4">
-                                        <span class="font-bold text-gray-900">${{ number_format($item['price'] * $item['quantity'], 2) }}</span>
+                                        <span class="font-bold text-gray-900">LKR {{ number_format($item['price'] * $item['quantity'], 2) }}</span>
                                     </td>
 
                                     <!-- Remove Button -->
@@ -107,7 +107,7 @@
                 <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
                     <div class="flex justify-end items-center">
                         <span class="text-lg font-semibold text-gray-700 mr-4">Total:</span>
-                        <span class="text-2xl font-bold text-gray-900">${{ number_format($total, 2) }}</span>
+                        <span class="text-2xl font-bold text-gray-900">LKR {{ number_format($total, 2) }}</span>
                     </div>
                 </div>
             </div>

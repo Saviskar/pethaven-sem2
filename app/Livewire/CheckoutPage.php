@@ -16,7 +16,7 @@ class CheckoutPage extends Component
     public $cartItems = [];
     public $total = 0;
     public $subtotal = 0;
-    public $shipping = 5.00;
+    public $shipping = 500.00;
 
     public $name = '';
     public $email = '';
@@ -89,7 +89,7 @@ class CheckoutPage extends Component
         foreach ($this->cartItems as $item) {
             $lineItems[] = [
                 'price_data' => [
-                    'currency' => 'usd',
+                    'currency' => 'lkr',
                     'product_data' => [
                         'name' => $item['name'],
                         // 'images' => [$item['image_url']], // Optional if image exists
@@ -103,7 +103,7 @@ class CheckoutPage extends Component
         // Add shipping
         $lineItems[] = [
             'price_data' => [
-                'currency' => 'usd',
+                'currency' => 'lkr',
                 'product_data' => [
                     'name' => 'Shipping Fee',
                 ],
