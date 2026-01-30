@@ -46,16 +46,20 @@
                                     <div class="text-sm text-gray-900">{{ $order->created_at->format('M d, Y') }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                        {{ match($order->status) {
-                                            'delivered' => 'bg-green-100 text-green-800',
-                                            'processing' => 'bg-yellow-100 text-yellow-800',
-                                            'shipped' => 'bg-blue-100 text-blue-800',
-                                            'cancelled' => 'bg-red-100 text-red-800',
-                                            default => 'bg-gray-100 text-gray-800'
-                                        } }}">
-                                        {{ ucfirst($order->status) }}
-                                    </span>
+                                    <select wire:change="updateStatus({{ $order->id }}, $event.target.value)"
+                                            class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md 
+                                            {{ match($order->status) {
+                                                'delivered' => 'bg-green-100 text-green-800',
+                                                'processing' => 'bg-yellow-100 text-yellow-800',
+                                                'shipped' => 'bg-blue-100 text-blue-800',
+                                                'cancelled' => 'bg-red-100 text-red-800',
+                                                default => 'bg-gray-100 text-gray-800'
+                                            } }}">
+                                        <option value="processing" {{ $order->status === 'processing' ? 'selected' : '' }}>Processing</option>
+                                        <option value="shipped" {{ $order->status === 'shipped' ? 'selected' : '' }}>Shipped</option>
+                                        <option value="delivered" {{ $order->status === 'delivered' ? 'selected' : '' }}>Delivered</option>
+                                        <option value="cancelled" {{ $order->status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                    </select>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="{{ route('admin.orders.show', $order) }}" class="text-indigo-600 hover:text-indigo-900">View</a>
