@@ -92,21 +92,21 @@
                 <div class="pt-6 border-t border-gray-200 space-y-4">
                     <div class="flex justify-between text-base text-gray-600">
                         <span>Subtotal</span>
-                        <span>${{ number_format($subtotal, 2) }}</span>
+                        <span>LKR {{ number_format($subtotal, 2) }}</span>
                     </div>
                     <div class="flex justify-between text-base text-gray-600">
                         <span>Shipping</span>
-                        <span>${{ number_format($shipping, 2) }}</span>
+                        <span>LKR {{ number_format($shipping, 2) }}</span>
                     </div>
                     <div class="flex justify-between text-lg font-bold text-gray-900 pt-4">
                         <span>Total</span>
-                        <span>${{ number_format($total, 2) }}</span>
+                        <span>LKR {{ number_format($total, 2) }}</span>
                     </div>
                 </div>
 
                 <!-- COD Note -->
                 <p class="text-sm text-gray-500">
-                    Cash on Delivery (COD) is available for orders below $100. Please have the exact amount ready upon delivery.
+                    Cash on Delivery (COD) is available for orders below LKR 25,000. Please have the exact amount ready upon delivery.
                 </p>
 
                 <!-- Place Order Button -->

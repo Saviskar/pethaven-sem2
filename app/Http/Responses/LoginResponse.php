@@ -22,9 +22,9 @@ class LoginResponse implements LoginResponseContract
                 : redirect()->route('admin.dashboard');
         }
 
-        // Redirect others to home page
+        // Redirect others to home page (or intended url)
         return $request->wantsJson()
             ? new JsonResponse('', 200)
-            : redirect()->route('home');
+            : redirect()->intended(route('home'));
     }
 }

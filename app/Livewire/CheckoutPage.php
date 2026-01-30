@@ -7,13 +7,16 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlaced;
 
 class CheckoutPage extends Component
 {
     public $cartItems = [];
     public $total = 0;
     public $subtotal = 0;
-    public $shipping = 5.00;
+    public $shipping = 500.00;
 
     public $name = '';
     public $email = '';
@@ -86,7 +89,7 @@ class CheckoutPage extends Component
         foreach ($this->cartItems as $item) {
             $lineItems[] = [
                 'price_data' => [
-                    'currency' => 'usd',
+                    'currency' => 'lkr',
                     'product_data' => [
                         'name' => $item['name'],
                         // 'images' => [$item['image_url']], // Optional if image exists
@@ -100,7 +103,7 @@ class CheckoutPage extends Component
         // Add shipping
         $lineItems[] = [
             'price_data' => [
-                'currency' => 'usd',
+                'currency' => 'lkr',
                 'product_data' => [
                     'name' => 'Shipping Fee',
                 ],
@@ -133,27 +136,34 @@ class CheckoutPage extends Component
             return redirect()->route('home');
         }
 
-        $order = Order::create([
-            'user_id' => auth()->id(),
-            'placed_at' => now(),
-            'status' => 'processing',
-        ]);
-
-        foreach ($this->cartItems as $productId => $item) {
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $productId, // Ensure this matches existing product IDs
-                'quantity' => $item['quantity'],
-                'unit_price_at_order' => $item['price'],
+        $order = DB::transaction(function () {
+            $order = Order::create([
+                'user_id' => auth()->id(),
+                'placed_at' => now(),
+                'status' => 'processing',
             ]);
 
-            // Decrement stock
-            $product = \App\Models\Product::find($productId);
-            if ($product) {
-                $product->stock = max(0, $product->stock - $item['quantity']);
-                $product->save();
+            foreach ($this->cartItems as $productId => $item) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $productId, // Ensure this matches existing product IDs
+                    'quantity' => $item['quantity'],
+                    'unit_price_at_order' => $item['price'],
+                ]);
+
+                // Decrement stock
+                $product = \App\Models\Product::find($productId);
+                if ($product) {
+                    $product->stock = max(0, $product->stock - $item['quantity']);
+                    $product->save();
+                }
             }
-        }
+            
+            return $order;
+        });
+
+        // Queue order confirmation email
+        Mail::to($this->email)->queue(new OrderPlaced($order));
 
         session()->forget('cart');
         $this->cartItems = [];

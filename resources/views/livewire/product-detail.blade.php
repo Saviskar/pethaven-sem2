@@ -81,7 +81,7 @@
 
                     <!-- Price -->
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
+                        <span class="text-4xl font-bold text-gray-900">LKR {{ number_format($product->price, 2) }}</span>
                     </div>
 
                     <!-- Description -->

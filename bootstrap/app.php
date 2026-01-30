@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
             \App\Http\Middleware\RoleRestrictedAccess::class,
+            \App\Http\Middleware\SecurityHeaders::class,
+        ]);
+
+        $middleware->api(prepend: [
+            'throttle:api',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -26,10 +26,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/', HomePage::class)->name('home');
-    Route::get('/shop/{type?}', ShopPage::class)->name('shop');
-    Route::get('/product/{product}', ProductDetail::class)->name('product.detail');
-    Route::get('/cart', CartPage::class)->name('cart');
     Route::get('/checkout', CheckoutPage::class)->name('checkout');
     Route::get('/checkout/success', CheckoutPage::class)->name('checkout.success');
     Route::get('/checkout/cancel', CheckoutPage::class)->name('checkout.cancel');
@@ -41,6 +37,11 @@ Route::middleware([
     Route::get('/my-orders', MyOrdersPage::class)->name('my-orders');
     Route::get('/my-orders/{order}', OrderDetailPage::class)->name('my-orders.show');
 });
+
+Route::get('/', HomePage::class)->name('home');
+Route::get('/shop/{type?}', ShopPage::class)->name('shop');
+Route::get('/product/{product}', ProductDetail::class)->name('product.detail');
+Route::get('/cart', CartPage::class)->name('cart');
 
 
 
