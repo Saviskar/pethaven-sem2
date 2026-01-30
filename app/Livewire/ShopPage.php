@@ -46,7 +46,11 @@ class ShopPage extends Component
         }
 
         // Get paginated products (12 per page)
-        $products = $query->paginate(12);
+        $cacheKey = 'shop_' . $this->petType . '_' . ($this->selectedCategory ?? 'all') . '_page_' . $this->getPage();
+        
+        $products = \Illuminate\Support\Facades\Cache::flexible($cacheKey, [5, 10], function () use ($query) {
+            return $query->paginate(12);
+        });
 
         return view('livewire.shop-page', [
             'products' => $products,

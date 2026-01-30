@@ -8,6 +8,8 @@ use Stripe\Checkout\Session;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlaced;
 
 class CheckoutPage extends Component
 {
@@ -134,7 +136,7 @@ class CheckoutPage extends Component
             return redirect()->route('home');
         }
 
-        DB::transaction(function () {
+        $order = DB::transaction(function () {
             $order = Order::create([
                 'user_id' => auth()->id(),
                 'placed_at' => now(),
@@ -156,7 +158,12 @@ class CheckoutPage extends Component
                     $product->save();
                 }
             }
+            
+            return $order;
         });
+
+        // Queue order confirmation email
+        Mail::to($this->email)->queue(new OrderPlaced($order));
 
         session()->forget('cart');
         $this->cartItems = [];
