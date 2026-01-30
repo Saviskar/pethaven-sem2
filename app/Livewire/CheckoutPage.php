@@ -7,6 +7,7 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutPage extends Component
 {
@@ -133,27 +134,29 @@ class CheckoutPage extends Component
             return redirect()->route('home');
         }
 
-        $order = Order::create([
-            'user_id' => auth()->id(),
-            'placed_at' => now(),
-            'status' => 'processing',
-        ]);
-
-        foreach ($this->cartItems as $productId => $item) {
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $productId, // Ensure this matches existing product IDs
-                'quantity' => $item['quantity'],
-                'unit_price_at_order' => $item['price'],
+        DB::transaction(function () {
+            $order = Order::create([
+                'user_id' => auth()->id(),
+                'placed_at' => now(),
+                'status' => 'processing',
             ]);
 
-            // Decrement stock
-            $product = \App\Models\Product::find($productId);
-            if ($product) {
-                $product->stock = max(0, $product->stock - $item['quantity']);
-                $product->save();
+            foreach ($this->cartItems as $productId => $item) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $productId, // Ensure this matches existing product IDs
+                    'quantity' => $item['quantity'],
+                    'unit_price_at_order' => $item['price'],
+                ]);
+
+                // Decrement stock
+                $product = \App\Models\Product::find($productId);
+                if ($product) {
+                    $product->stock = max(0, $product->stock - $item['quantity']);
+                    $product->save();
+                }
             }
-        }
+        });
 
         session()->forget('cart');
         $this->cartItems = [];
