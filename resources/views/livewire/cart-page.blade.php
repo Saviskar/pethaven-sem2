@@ -120,12 +120,21 @@
                 >
                     Clear Cart
                 </button>
-                <a 
-                    href="{{ route('checkout') }}"
-                    class="px-8 py-3 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 inline-block text-center"
-                >
-                    Checkout
-                </a>
+                @auth
+                    <a 
+                        href="{{ route('checkout') }}"
+                        class="px-8 py-3 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 inline-block text-center"
+                    >
+                        Checkout
+                    </a>
+                @else
+                    <a 
+                        href="{{ route('checkout') }}"
+                        class="px-8 py-3 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 inline-block text-center"
+                    >
+                        Login to Checkout
+                    </a>
+                @endauth
             </div>
         @else
             <!-- Empty Cart State -->
