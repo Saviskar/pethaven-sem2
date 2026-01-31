@@ -43,6 +43,7 @@
                 @endif
             "
             @show-toast.window="
+                console.log('Toast Event Received:', $event.detail);
                 message = $event.detail.message;
                 type = $event.detail.type || 'success';
                 show = true;

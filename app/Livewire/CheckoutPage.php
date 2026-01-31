@@ -122,6 +122,7 @@ class CheckoutPage extends Component
                 'customer_email' => $this->email,
             ]);
 
+            \Log::info('Stripe Session Created: ' . $checkout_session->id);
             return redirect($checkout_session->url);
         } catch (\Exception $e) {
             $this->dispatch('show-toast', [
