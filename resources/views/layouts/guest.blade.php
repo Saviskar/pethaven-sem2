@@ -24,10 +24,21 @@
 
         <!-- Toast Notification -->
         <div 
-            x-data="{ show: false, message: '' }"
+            x-data="{ 
+                show: false, 
+                message: '', 
+                type: 'success' 
+            }"
             x-init="
                 @if(session()->has('message'))
                     message = '{{ session('message') }}';
+                    type = 'success';
+                    show = true;
+                    setTimeout(() => show = false, 4000);
+                @endif
+                @if(session()->has('error'))
+                    message = '{{ session('error') }}';
+                    type = 'error';
                     show = true;
                     setTimeout(() => show = false, 4000);
                 @endif
@@ -44,8 +55,13 @@
         >
             <div class="p-4 flex items-center">
                 <div class="flex-shrink-0">
-                    <svg class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <!-- Success Icon -->
+                    <svg x-show="type === 'success'" class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <!-- Error Icon -->
+                    <svg x-show="type === 'error'" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
                 <div class="ml-3 w-0 flex-1 pt-0.5">
