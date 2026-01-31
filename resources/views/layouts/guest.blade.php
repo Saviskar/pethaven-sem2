@@ -22,7 +22,6 @@
             {{ $slot }}
         </div>
 
-        <!-- Toast Notification -->
         <div 
             x-data="{ 
                 show: false, 
@@ -42,6 +41,12 @@
                     show = true;
                     setTimeout(() => show = false, 4000);
                 @endif
+            "
+            @show-toast.window="
+                message = $event.detail.message;
+                type = $event.detail.type || 'success';
+                show = true;
+                setTimeout(() => show = false, 4000);
             "
             x-show="show"
             x-transition:enter="transform ease-out duration-300 transition"

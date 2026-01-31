@@ -124,6 +124,10 @@ class CheckoutPage extends Component
 
             return redirect($checkout_session->url);
         } catch (\Exception $e) {
+            $this->dispatch('show-toast', [
+                'type' => 'error',
+                'message' => 'Payment initialization failed: ' . $e->getMessage()
+            ]);
             session()->flash('error', 'Payment initialization failed: ' . $e->getMessage());
         }
     }
