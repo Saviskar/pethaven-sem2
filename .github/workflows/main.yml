@@ -1,0 +1,49 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup PHP (For testing, optional)
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+
+    - name: Copy .env.example to .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    # Optional: Run Tests before deploying
+    # - name: Execute tests
+    #   run: vendor/bin/phpunit
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST_DNS }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          # Verify we are in the correct directory or clone if it doesn't exist
+          if [ ! -d "/var/www/pethaven" ]; then
+            sudo git clone https://github.com/${{ github.repository }}.git /var/www/pethaven
+            sudo chown -R ubuntu:www-data /var/www/pethaven
+            cd /var/www/pethaven
+            cp .env.production.example .env
+            # You will need to SSH in manually once to set DB credentials in .env
+          fi
+          
+          # Run the deploy script we created earlier
+          cd /var/www/pethaven
+          git checkout main
+          bash deploy.sh
