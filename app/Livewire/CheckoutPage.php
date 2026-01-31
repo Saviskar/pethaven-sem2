@@ -83,7 +83,7 @@ class CheckoutPage extends Component
             return;
         }
 
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(config('services.stripe.secret'));
 
         $lineItems = [];
         foreach ($this->cartItems as $item) {
