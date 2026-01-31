@@ -27,6 +27,7 @@ jobs:
     # - name: Execute tests
     #   run: vendor/bin/phpunit
 
+    # ... (rest of the file is the same)
     - name: Deploy to EC2
       uses: appleboy/ssh-action@master
       with:
@@ -34,16 +35,15 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          # Verify we are in the correct directory or clone if it doesn't exist
-          if [ ! -d "/var/www/pethaven" ]; then
-            sudo git clone https://github.com/${{ github.repository }}.git /var/www/pethaven
-            sudo chown -R ubuntu:www-data /var/www/pethaven
-            cd /var/www/pethaven
-            cp .env.production.example .env
-            # You will need to SSH in manually once to set DB credentials in .env
-          fi
-          
-          # Run the deploy script we created earlier
+          # Navigate to the folder
           cd /var/www/pethaven
-          git checkout main
+
+          # 1. FETCH the latest changes from GitHub
+          git fetch origin main
+
+          # 2. FORCE the server to match GitHub exactly 
+          # (This fixes the missing file AND the 'M composer.lock' warnings you saw)
+          git reset --hard origin/main
+
+          # 3. NOW we can run the script, because it definitely exists
           bash deploy.sh
