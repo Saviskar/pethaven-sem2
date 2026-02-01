@@ -36,7 +36,13 @@
                     @endif
                 </a>
 
-                <!-- User Icon -->
+                <!-- Admin Dashboard Button -->
+                @if(auth()->check() && auth()->user()->role->name === 'admin')
+                    <a href="{{ route('admin.dashboard') }}" class="hidden sm:block relative bg-rose-500 hover:bg-rose-600 px-4 py-2 rounded-lg text-white font-medium transition-colors">
+                        Admin Panel
+                    </a>
+                @endif
+
                 <!-- User Icon -->
                 <a href="{{ route('dashboard') }}" class="hidden sm:block text-gray-600 hover:text-rose-500 transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,6 +68,11 @@
                 
                 <!-- Mobile Cart & User Links -->
                 <div class="sm:hidden pt-2 border-t border-gray-200 space-y-1">
+                    @if(auth()->check() && auth()->user()->role->name === 'admin')
+                        <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 rounded-md text-base font-medium text-rose-500 hover:text-rose-600 hover:bg-gray-50 transition-colors">
+                            Admin Panel
+                        </a>
+                    @endif
                     <a href="{{ route('cart') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">
                         Cart
                         @if($cartCount > 0)
