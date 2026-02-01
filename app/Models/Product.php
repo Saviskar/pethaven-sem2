@@ -45,4 +45,9 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    public function getActivePromotionAttribute()
+    {
+        return $this->promotions->where('status', true)->first();
+    }
 }

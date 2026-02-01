@@ -28,7 +28,9 @@ class HomePage extends Component
 
     public function loadProducts()
     {
-        $query = Product::with('category');
+        $query = Product::with(['category', 'promotions' => function($q) {
+            $q->where('status', true);
+        }]);
 
         if ($this->search) {
             $query->where(function($q) {

@@ -33,7 +33,7 @@ class ShopPage extends Component
         $categories = Category::all();
 
         // Build the query
-        $query = Product::with('category');
+        $query = Product::with(['category', 'promotions']);
 
         // Filter by category if selected
         $currentTitle = $this->petType;
