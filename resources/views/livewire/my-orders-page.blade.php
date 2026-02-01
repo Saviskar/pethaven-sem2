@@ -22,7 +22,7 @@
                             @foreach($orders as $order)
                                 <tr class="hover:bg-gray-50 transition-colors">
                                     <td class="px-6 py-4 text-gray-900 font-medium">#{{ $order->id }}</td>
-                                    <td class="px-6 py-4 text-gray-600">{{ $order->created_at->format('M d, Y') }}</td>
+                                    <td class="px-6 py-4 text-gray-600">{{ $order->placed_at->format('M d, Y') }}</td>
                                     <td class="px-6 py-4">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
                                             @if($order->status === 'processing') bg-blue-100 text-blue-800
