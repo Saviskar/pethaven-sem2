@@ -21,6 +21,8 @@ class RoleRestrictedAccess
             $allowedRoutes = [
                 'home',
                 'shop',
+                'services',
+                'community',
                 'product.detail',
                 'cart',
                 'checkout',
