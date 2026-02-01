@@ -16,7 +16,7 @@
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <h1 class="text-3xl font-bold text-gray-900">Order Details</h1>
             <div class="flex items-center gap-4">
-                 <span class="text-sm text-gray-500">Placed on {{ $order->created_at->format('M d, Y') }}</span>
+                 <span class="text-sm text-gray-500">Placed on {{ $order->placed_at->format('M d, Y') }}</span>
                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
                     @if($order->status === 'processing') bg-blue-100 text-blue-800
                     @elseif($order->status === 'shipped') bg-yellow-100 text-yellow-800
