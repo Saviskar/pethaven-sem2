@@ -62,4 +62,5 @@
             </div>
         @endif
     </section>
+    <x-footer />
 </div>
