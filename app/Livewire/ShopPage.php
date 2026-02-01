@@ -13,8 +13,13 @@ class ShopPage extends Component
 
     public $selectedCategory = null;
     public $petType = 'all'; // Default to dog, can be changed based on route parameter
+    public $search = '';
 
-    protected $queryString = ['selectedCategory', 'petType'];
+    protected $queryString = [
+        'selectedCategory', 
+        'petType',
+        'search' => ['except' => '']
+    ];
 
     public function mount($type = 'all')
     {
@@ -25,6 +30,12 @@ class ShopPage extends Component
     {
         $this->selectedCategory = $categoryId;
         $this->resetPage(); // Reset to page 1 when category changes
+    }
+    
+    // Reset page when search changes
+    public function updatedSearch()
+    {
+        $this->resetPage();
     }
 
     public function render()
@@ -45,8 +56,13 @@ class ShopPage extends Component
             }
         }
 
+        // Filter by search term
+        if (!empty($this->search)) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        }
+
         // Get paginated products (12 per page)
-        $cacheKey = 'shop_' . $this->petType . '_' . ($this->selectedCategory ?? 'all') . '_page_' . $this->getPage();
+        $cacheKey = 'shop_' . $this->petType . '_' . ($this->selectedCategory ?? 'all') . '_search_' . md5($this->search) . '_page_' . $this->getPage();
         
         $products = \Illuminate\Support\Facades\Cache::flexible($cacheKey, [5, 10], function () use ($query) {
             return $query->paginate(12);
