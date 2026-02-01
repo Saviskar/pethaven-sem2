@@ -1,4 +1,8 @@
 <div>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
     {{-- Include Navigation Bar Component --}}
     <livewire:navigation-bar />
 
@@ -24,16 +28,16 @@
             </div>
 
             {{-- Category Filter Buttons --}}
-            <div class="flex flex-wrap gap-3 mb-8">
+            <div class="flex overflow-x-auto pb-4 md:pb-0 md:flex-wrap gap-3 mb-8 no-scrollbar scroll-smooth">
                 <button 
                     wire:click="selectCategory(null)"
-                    class="px-6 py-2 rounded-full font-medium transition-all duration-200 {{ $selectedCategory === null ? 'bg-gray-900 text-white shadow-lg' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
+                    class="whitespace-nowrap px-6 py-2 rounded-full font-medium transition-all duration-200 {{ $selectedCategory === null ? 'bg-gray-900 text-white shadow-lg' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
                     All
                 </button>
                 @foreach($categories as $category)
                     <button 
                         wire:click="selectCategory({{ $category->id }})"
-                        class="px-6 py-2 rounded-full font-medium transition-all duration-200 {{ $selectedCategory == $category->id ? 'bg-gray-900 text-white shadow-lg' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
+                        class="whitespace-nowrap px-6 py-2 rounded-full font-medium transition-all duration-200 {{ $selectedCategory == $category->id ? 'bg-gray-900 text-white shadow-lg' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
                         {{ $category->name }}
                     </button>
                 @endforeach
