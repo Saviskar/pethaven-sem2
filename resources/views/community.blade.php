@@ -123,4 +123,5 @@
             </div>
         </div>
     </div>
+    <x-footer />
 </x-guest-layout>

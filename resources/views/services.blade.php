@@ -84,4 +84,5 @@
 
 
     </div>
+    <x-footer />
 </x-guest-layout>
