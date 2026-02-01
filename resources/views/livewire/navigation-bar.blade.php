@@ -12,8 +12,8 @@
             <!-- Navigation Links (Desktop) -->
             <div class="hidden md:flex items-center space-x-8">
                 <a href="{{ route('shop') }}" class="text-gray-700 hover:text-rose-500 font-medium transition-colors">Shop</a>
-                <a href="#" class="text-gray-700 hover:text-rose-500 font-medium transition-colors">Services</a>
-                <a href="#" class="text-gray-700 hover:text-rose-500 font-medium transition-colors">Community</a>
+                <a href="{{ route('services') }}" class="text-gray-700 hover:text-rose-500 font-medium transition-colors">Services</a>
+                <a href="{{ route('community') }}" class="text-gray-700 hover:text-rose-500 font-medium transition-colors">Community</a>
             </div>
 
             <!-- Right Side Icons -->
@@ -57,8 +57,8 @@
              class="md:hidden border-t border-gray-200">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="{{ route('shop') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Shop</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Services</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Community</a>
+                <a href="{{ route('services') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Services</a>
+                <a href="{{ route('community') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 transition-colors">Community</a>
                 
                 <!-- Mobile Cart & User Links -->
                 <div class="sm:hidden pt-2 border-t border-gray-200 space-y-1">
