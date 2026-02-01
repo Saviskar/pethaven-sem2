@@ -12,9 +12,7 @@ class HomePage extends Component
 
     public function mount()
     {
-        if (auth()->check() && auth()->user()->role_id === 1) {
-            return redirect()->route('admin.dashboard');
-        }
+
 
         // Load featured products on component initialization
         $this->loadProducts();
