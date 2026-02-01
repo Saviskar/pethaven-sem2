@@ -53,9 +53,10 @@ class ProductDetail extends Component
             $cart[$productId]['quantity'] += $this->quantity;
         } else {
             // Add new product to cart
+            // Add new product to cart
             $cart[$productId] = [
                 'name' => $this->product->name,
-                'price' => $this->product->price,
+                'price' => $this->product->discounted_price,
                 'quantity' => $this->quantity,
                 'image_url' => $this->product->image_url,
             ];

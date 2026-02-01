@@ -50,4 +50,16 @@ class Product extends Model
     {
         return $this->promotions->where('status', true)->first();
     }
+
+    public function getDiscountedPriceAttribute()
+    {
+        $activePromotion = $this->active_promotion;
+
+        if ($activePromotion) {
+            $discount = $this->price * ($activePromotion->percentage / 100);
+            return round($this->price - $discount, 2);
+        }
+
+        return $this->price;
+    }
 }
