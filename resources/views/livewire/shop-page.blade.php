@@ -18,6 +18,11 @@
             {{-- Page Title --}}
             <h1 class="text-4xl font-bold text-gray-900 mb-8 capitalize">{{ $currentTitle }}</h1>
 
+            {{-- Search Bar --}}
+            <div class="mb-8">
+                <x-search-bar wire:model.live.debounce.300ms="search" />
+            </div>
+
             {{-- Category Filter Buttons --}}
             <div class="flex flex-wrap gap-3 mb-8">
                 <button 
