@@ -15,6 +15,13 @@
                 </svg>
             </div>
         @endif
+        @if($product->active_promotion)
+            <div class="absolute top-2 right-2 z-10">
+                <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md animate-pulse">
+                    {{ $product->active_promotion->title }} ({{ $product->active_promotion->percentage }}% OFF)
+                </span>
+            </div>
+        @endif
     </div>
 
     <!-- Product Details -->

@@ -43,11 +43,21 @@
                         <!-- Products -->
                         <div class="col-span-6">
                             <label for="products" class="block text-sm font-medium text-gray-700">Applicable Products</label>
-                            <select wire:model="selectedProducts" id="products" multiple class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm h-64">
-                                @foreach($products as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }} (${{ $product->price }})</option>
-                                @endforeach
-                            </select>
+                            <div class="mt-1 border border-gray-300 rounded-md p-4 h-64 overflow-y-auto bg-white">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    @foreach($products as $product)
+                                        <div class="flex items-start">
+                                            <div class="flex items-center h-5">
+                                                <input id="product-{{ $product->id }}" wire:model="selectedProducts" value="{{ $product->id }}" type="checkbox" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="product-{{ $product->id }}" class="font-medium text-gray-700">{{ $product->name }}</label>
+                                                <p class="text-gray-500">${{ $product->price }}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                             <p class="mt-2 text-sm text-gray-500">Hold Ctrl (Windows) or Command (Mac) to select multiple products.</p>
                              @error('selectedProducts') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                         </div>
