@@ -89,7 +89,14 @@
 
                     <!-- Price -->
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">LKR {{ number_format($product->price, 2) }}</span>
+                        @if($product->active_promotion)
+                            <div class="flex items-center gap-3">
+                                <span class="text-4xl font-bold text-rose-600">LKR {{ number_format($product->discounted_price, 2) }}</span>
+                                <span class="text-xl text-gray-500 line-through">LKR {{ number_format($product->price, 2) }}</span>
+                            </div>
+                        @else
+                            <span class="text-4xl font-bold text-gray-900">LKR {{ number_format($product->price, 2) }}</span>
+                        @endif
                     </div>
 
                     <!-- Description -->
