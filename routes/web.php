@@ -42,6 +42,12 @@ Route::get('/', HomePage::class)->name('home');
 Route::get('/shop/{type?}', ShopPage::class)->name('shop');
 Route::get('/product/{product}', ProductDetail::class)->name('product.detail');
 Route::get('/cart', CartPage::class)->name('cart');
+Route::get('/community', function () {
+    return view('community');
+})->name('community');
+Route::get('/services', function () {
+    return view('services');
+})->name('services');
 
 
 
