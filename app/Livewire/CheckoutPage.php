@@ -168,7 +168,8 @@ class CheckoutPage extends Component
         });
 
         // Queue order confirmation email
-        Mail::to($this->email)->queue(new OrderPlaced($order));
+        \Log::info('Queueing Order Confirmation Email to ' . auth()->user()->email . ' for Order ID: ' . $order->id);
+        Mail::to(auth()->user()->email)->queue(new OrderPlaced($order));
 
         session()->forget('cart');
         $this->cartItems = [];
