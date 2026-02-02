@@ -44,7 +44,7 @@
             </div>
 
             {{-- Products Grid --}}
-            <div class="grid grid-cols-2 gap-6 mb-12">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 @forelse($products as $product)
                     <a href="{{ route('product.detail', $product) }}" 
                        class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">

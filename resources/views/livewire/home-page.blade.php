@@ -35,7 +35,7 @@
     <!-- Products Grid -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         @if(count($featuredProducts) > 0)
-            <div class="grid grid-cols-2 gap-6 md:gap-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 @foreach($featuredProducts as $product)
                     @livewire('product-card', ['product' => $product], key($product->id))
                 @endforeach
