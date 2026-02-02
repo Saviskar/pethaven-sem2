@@ -12,7 +12,7 @@
     <!-- Stat 2 -->
     <div class="overflow-hidden bg-white rounded-lg shadow sm:p-6">
         <dt class="text-sm font-medium text-gray-500 truncate">Total Revenue</dt>
-        <dd class="mt-1 text-3xl font-semibold text-gray-900">${{ number_format($totalRevenue, 2) }}</dd>
+        <dd class="mt-1 text-3xl font-semibold text-gray-900">LKR {{ number_format($totalRevenue, 2) }}</dd>
     </div>
 
     <!-- Stat 3 -->
