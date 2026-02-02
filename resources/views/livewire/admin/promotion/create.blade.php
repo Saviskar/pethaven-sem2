@@ -52,7 +52,7 @@
                                             </div>
                                             <div class="ml-3 text-sm">
                                                 <label for="product-{{ $product->id }}" class="font-medium text-gray-700">{{ $product->name }}</label>
-                                                <p class="text-gray-500">${{ $product->price }}</p>
+                                                <p class="text-gray-500">LKR {{ $product->price }}</p>
                                             </div>
                                         </div>
                                     @endforeach

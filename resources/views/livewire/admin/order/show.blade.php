@@ -117,13 +117,13 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">${{ number_format($item->unit_price_at_order, 2) }}</div>
+                                        <div class="text-sm text-gray-900">LKR {{ number_format($item->unit_price_at_order, 2) }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">{{ $item->quantity }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">${{ number_format($item->unit_price_at_order * $item->quantity, 2) }}</div>
+                                        <div class="text-sm text-gray-900">LKR {{ number_format($item->unit_price_at_order * $item->quantity, 2) }}</div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -133,7 +133,7 @@
                                     Total Amount:
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
-                                    ${{ number_format($order->items->sum(fn($item) => $item->unit_price_at_order * $item->quantity), 2) }}
+                                    LKR {{ number_format($order->items->sum(fn($item) => $item->unit_price_at_order * $item->quantity), 2) }}
                                 </td>
                             </tr>
                         </tbody>
