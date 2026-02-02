@@ -39,6 +39,8 @@ class OrderPlaced extends Mailable
      */
     public function content(): Content
     {
+        \Log::info('Processing Order Confirmation Email Job for ' . $this->order->user->email . ' (Order ID: ' . $this->order->id . ')');
+
         return new Content(
             markdown: 'emails.orders.placed',
         );
