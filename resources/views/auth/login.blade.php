@@ -67,8 +67,11 @@
                         autofocus 
                         autocomplete="username"
                         placeholder="Email"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                        class="w-full px-4 py-3 border @error('email') border-red-500 @else border-gray-300 @enderror rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                     />
+                    @error('email')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 
                 <!-- Password Field -->
@@ -81,8 +84,11 @@
                         required 
                         autocomplete="current-password"
                         placeholder="Password"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                        class="w-full px-4 py-3 border @error('password') border-red-500 @else border-gray-300 @enderror rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                     />
+                    @error('password')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 
                 <!-- Forgot Password Link -->
