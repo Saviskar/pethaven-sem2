@@ -7,6 +7,11 @@ use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+use Livewire\Attributes\Lazy;
+use Livewire\Attributes\Layout;
+
+#[Lazy]
+#[Layout('layouts.guest')]
 class ShopPage extends Component
 {
     use WithPagination;
@@ -72,6 +77,11 @@ class ShopPage extends Component
             'products' => $products,
             'categories' => $categories,
             'currentTitle' => $currentTitle,
-        ])->layout('layouts.guest');
+        ]);
+    }
+
+    public function placeholder()
+    {
+        return view('skeletons.product-grid');
     }
 }

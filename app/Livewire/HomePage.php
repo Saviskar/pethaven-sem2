@@ -5,6 +5,11 @@ namespace App\Livewire;
 use App\Models\Product;
 use Livewire\Component;
 
+use Livewire\Attributes\Lazy;
+use Livewire\Attributes\Layout;
+
+#[Lazy]
+#[Layout('layouts.guest')]
 class HomePage extends Component
 {
     public $search = '';
@@ -45,6 +50,12 @@ class HomePage extends Component
 
     public function render()
     {
-        return view('livewire.home-page')->layout('layouts.guest');
+        sleep(2);
+        return view('livewire.home-page');
+    }
+
+    public function placeholder()
+    {
+        return view('skeletons.product-grid');
     }
 }

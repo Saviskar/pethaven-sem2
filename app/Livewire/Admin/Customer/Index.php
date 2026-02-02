@@ -6,6 +6,11 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
 
+use Livewire\Attributes\Lazy;
+use Livewire\Attributes\Layout;
+
+#[Lazy]
+#[Layout('layouts.admin')]
 class Index extends Component
 {
     use WithPagination;
@@ -18,6 +23,11 @@ class Index extends Component
 
         return view('livewire.admin.customer.index', [
             'customers' => $customers
-        ])->layout('layouts.admin');
+        ]);
+    }
+
+    public function placeholder()
+    {
+        return view('skeletons.table');
     }
 }
