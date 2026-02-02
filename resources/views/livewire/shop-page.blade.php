@@ -44,7 +44,7 @@
             </div>
 
             {{-- Products Grid --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 @forelse($products as $product)
                     <a href="{{ route('product.detail', $product) }}" 
                        class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
@@ -66,7 +66,7 @@
                             @if($product->active_promotion)
                                 <div class="absolute top-2 right-2 z-10">
                                     <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md">
-                                        {{ $product->active_promotion->title }} ({{ $product->active_promotion->percentage }}% OFF)
+                                        {{ $product->active_promotion->percentage }}% OFF
                                     </span>
                                 </div>
                             @endif
