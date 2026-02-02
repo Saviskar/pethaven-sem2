@@ -45,7 +45,7 @@
                         @if($product->active_promotion)
                             <div class="absolute top-4 right-4 z-10">
                                 <span class="bg-red-500 text-white text-sm font-bold px-3 py-1.5 rounded-full shadow-md">
-                                    {{ $product->active_promotion->title }} ({{ $product->active_promotion->percentage }}% OFF)
+                                    {{ $product->active_promotion->percentage }}% OFF
                                 </span>
                             </div>
                         @endif
