@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::with('category');
+        $query = Product::with(['category', 'promotions']);
 
         if ($request->has('category_id')) {
             $query->where('category_id', $request->category_id);
@@ -33,6 +33,8 @@ class ProductController extends Controller
             return response()->json(['message' => 'Product not found'], 404);
         }
 
+        $product->append(['active_promotion', 'discounted_price']);
+
         return response()->json(['data' => $product]);
     }
 
@@ -41,6 +43,10 @@ class ProductController extends Controller
         $products = Product::whereHas('promotions', function ($query) {
             $query->where('status', true);
         })->with(['category', 'promotions'])->get();
+
+        $products->each(function ($product) {
+            $product->append(['active_promotion', 'discounted_price']);
+        });
 
         return response()->json(['data' => $products]);
     }
