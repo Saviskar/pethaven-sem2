@@ -35,4 +35,13 @@ class ProductController extends Controller
 
         return response()->json(['data' => $product]);
     }
+
+    public function offers()
+    {
+        $products = Product::whereHas('promotions', function ($query) {
+            $query->where('status', true);
+        })->with(['category', 'promotions'])->get();
+
+        return response()->json(['data' => $products]);
+    }
 }

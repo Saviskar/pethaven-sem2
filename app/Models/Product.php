@@ -19,6 +19,11 @@ class Product extends Model
         'image_url'
     ];
 
+    protected $appends = [
+        'active_promotion',
+        'discounted_price'
+    ];
+
     protected function casts(): array
     {
         return [
