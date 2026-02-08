@@ -72,6 +72,44 @@ class AuthController extends Controller
     }
 
     public function user(Request $request) {
-        return response()->json($request->user());
+        return response()->json($request->user()->load('addresses.city'));
+    }
+
+    public function update(Request $request)
+    {
+        $user = $request->user();
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'nullable|string|max:255',
+            'mobile' => 'nullable|string|max:15',
+            'password' => 'nullable|string|min:8|confirmed',
+            'current_password' => 'required_with:password|nullable|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        if ($request->has('name')) {
+            $user->name = $request->name;
+        }
+
+        if ($request->has('mobile')) {
+            $user->mobile = $request->mobile;
+        }
+
+        if ($request->filled('password')) {
+            if (!Hash::check($request->current_password, $user->password)) {
+                return response()->json(['message' => 'Current password does not match'], 400);
+            }
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'Profile updated successfully',
+            'data' => $user->load('addresses.city')
+        ]);
     }
 }
